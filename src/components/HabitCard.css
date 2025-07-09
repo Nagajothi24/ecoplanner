@@ -1,0 +1,13 @@
+.habit-card{
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: #e0f7e9;
+    box-shadow: 0 2px 6px rgba(0,128,0,0.1);
+}
+
+.habit-card.checked{
+    text-decoration: line-through;
+    background-color: #c5eccf;
+    font-weight: bold;
+}
