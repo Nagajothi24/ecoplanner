@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ecoplanner/static/css/main.fef76d7b.css",
+    "main.js": "/ecoplanner/static/js/main.feed6bfc.js",
+    "index.html": "/ecoplanner/index.html",
+    "main.fef76d7b.css.map": "/ecoplanner/static/css/main.fef76d7b.css.map",
+    "main.feed6bfc.js.map": "/ecoplanner/static/js/main.feed6bfc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fef76d7b.css",
+    "static/js/main.feed6bfc.js"
+  ]
+}
