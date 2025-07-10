@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ecoplanner/static/css/main.fef76d7b.css",
-    "main.js": "/ecoplanner/static/js/main.69f0ee61.js",
+    "main.js": "/ecoplanner/static/js/main.ec552d57.js",
     "index.html": "/ecoplanner/index.html",
     "main.fef76d7b.css.map": "/ecoplanner/static/css/main.fef76d7b.css.map",
-    "main.69f0ee61.js.map": "/ecoplanner/static/js/main.69f0ee61.js.map"
+    "main.ec552d57.js.map": "/ecoplanner/static/js/main.ec552d57.js.map"
   },
   "entrypoints": [
     "static/css/main.fef76d7b.css",
-    "static/js/main.69f0ee61.js"
+    "static/js/main.ec552d57.js"
   ]
 }
