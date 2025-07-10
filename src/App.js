@@ -5,49 +5,67 @@ import HabitCard from './components/HabitCard';
 import Dashboard from './components/Dashboard';
 import StreakTracker from './components/StreakTracker';
 import ThemeToggle from './components/ThemeToggle';
+
 function App() {
-  const today = new Date().toISOString().split("T")[0]; // e.g., '2025-07-08'
-  const lastDate = localStorage.getItem('lastDate');
+  const today = new Date().toISOString().split("T")[0];
 
-  if (lastDate !== today) {
-    localStorage.removeItem('ecoHabits'); // Reset checked habits
-    localStorage.setItem('lastDate', today); // Update to today
-  }
-
-  
   const [checkedHabits, setCheckedHabits] = useState(() => {
     const saved = localStorage.getItem('ecoHabits');
     return saved ? JSON.parse(saved) : {};
   });
+
   const [theme, setTheme] = useState('light');
+  const [streak, setStreak] = useState(() => {
+    const savedStreak = localStorage.getItem('ecoStreak');
+    return savedStreak ? parseInt(savedStreak, 10) : 0;
+  });
 
-useEffect(() => {
-  document.body.className = theme;
-}, [theme]);
+  const [lastDate, setLastDate] = useState(() => {
+    return localStorage.getItem('lastDate') || today;
+  });
 
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   useEffect(() => {
     localStorage.setItem('ecoHabits', JSON.stringify(checkedHabits));
   }, [checkedHabits]);
 
+  useEffect(() => {
+    if (lastDate !== today) {
+      const allHabitsDone = habits.every(habit => checkedHabits[habit.id]);
+
+      const newStreak = allHabitsDone ? streak + 1 : 0;
+      setStreak(newStreak);
+      localStorage.setItem('ecoStreak', newStreak.toString());
+
+      // Reset checkboxes
+      setCheckedHabits({});
+      localStorage.setItem('lastDate', today);
+      setLastDate(today);
+    }
+  }, [today, lastDate, checkedHabits, streak]);
+
   const toggleHabit = (id) => {
-    setCheckedHabits((prev) => ({ ...prev, [id]: !prev[id] }));
+    setCheckedHabits(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
   };
 
   return (
     <div className="App">
       <ThemeToggle theme={theme} setTheme={setTheme} />
-
       <h1>🌿 EcoPlanner</h1>
       <p>Track your zero-waste habits daily!</p>
-       {/* Dashboard component */}
-    <Dashboard habits={habits} checkedHabits={checkedHabits} />
-    <StreakTracker checkedHabits={checkedHabits} />
+      <Dashboard habits={habits} checkedHabits={checkedHabits} />
+      <StreakTracker checkedHabits={checkedHabits} streak={streak} />
       {habits.map((habit) => (
         <HabitCard
           key={habit.id}
           habit={habit}
-          isChecked={checkedHabits[habit.id]}
+          isChecked={checkedHabits[habit.id] || false}
           onToggle={toggleHabit}
         />
       ))}
@@ -56,4 +74,3 @@ useEffect(() => {
 }
 
 export default App;
-
